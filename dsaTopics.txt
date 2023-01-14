@@ -1,0 +1,37 @@
+single linked list 
+	* push 
+	* pop 
+	* shift 
+	* unshift 
+	* get 
+	* set 
+	* insert  
+	* remove  
+	* reverse
+doubly linked list
+	* push 
+	* pop 
+	* shift 
+	* unshift 
+	* get 
+	* set 
+	* insert  
+	* remove  
+	* reverse
+
+binary search tree 
+
+	* insert 
+	* find 
+
+tree traversal
+	* Breath first search 
+	* Depth first search 
+	* Dfs inorder 
+	* Dfs PostOrder 
+	* Dfs preOrder 
+
+binary heaps
+	* maxbinary heap 
+	* exactMax heap 
+
