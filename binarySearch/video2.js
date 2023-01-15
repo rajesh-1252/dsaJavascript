@@ -1,6 +1,20 @@
 // celling of a number
 
 // smallest element in an array that is greater than or equal to target
+const binarySearch = (arr, target, s, e) => {
+  while (s <= e) {
+    let middle = Math.floor(s + (e - s) / 2);
+    if (arr[middle] === target) {
+      return middle;
+    }
+    if (arr[middle] > target) {
+      e = middle - 1;
+    } else {
+      s = middle + 1;
+    }
+  }
+  return -1;
+};
 
 const celling = (arr, target) => {
   let s = 0;
@@ -114,6 +128,63 @@ const firstOccurance2 = (arr, target, occurance) => {
   return ans;
 };
 // console.log(searchRange1([1, 2, 2, 2, 2, 2, 5]));
-console.log(searchRange1([1, 2, 2, 2, 4, 5], 2));
+// console.log(searchRange1([1, 2, 2, 2, 4, 5], 2));
 
-console.log(searchRange1([1, 2, 3, 3, 3, 3, 4, 5], 3));
+// console.log(searchRange1([1, 2, 3, 3, 3, 3, 4, 5], 3));
+
+// rotated binary search
+
+// find the pivot ? pivot is the largest element & p > m + 1 & p < m-1
+
+// findPivot
+
+const findPivot = (arr) => {
+  let s = 0;
+  let e = arr.length - 1;
+  while (s <= e) {
+    let mid = Math.floor((e - s) / 2);
+    // if the mid is pivot
+    if (arr[mid] > arr[mid + 1]) {
+      // pivot
+      return mid;
+    } else if (arr[mid] < arr[mid - 1]) {
+      // pivot
+      return mid - 1;
+    }
+    // edge case: if the mid is not equal to pivot
+    if (arr[s] >= arr[mid]) {
+      e = mid - 1;
+    } else if (arr[s] <= arr[mid]) {
+      s = mid + 1;
+    }
+  }
+  return -1;
+};
+
+// console.log(findPivot([7, 4, 5, 6, 0, 1, 2, 3]));
+
+// search in pivoted array
+
+// check weather the array is pivoted if not do simple binary search
+// check if the target is less than start ? binarySearch(s: p + 1, e: arr.length -1) : binarySearch(s = 0 , e = p -1  )
+
+const search = (arr, target) => {
+  let pivot = findPivot(arr);
+  // edge case
+  if (pivot === -1) {
+    return binarySearch(arr, target, 0, arr.length - 1);
+  }
+  if (arr[pivot] === target) {
+    return pivot;
+  }
+  // target < arr[0] ; ie: target less than start
+  if (target >= arr[0]) {
+    return binarySearch(arr, target, 0, pivot - 1);
+  } else if (target <= arr[0]) {
+    console.log(pivot, arr.length - 1);
+    return binarySearch(arr, target, pivot + 1, arr.length - 1);
+  }
+  return -1;
+};
+
+console.log(search([4, 5, 6, 0, 1, 2, 3], 0));
