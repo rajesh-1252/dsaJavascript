@@ -181,10 +181,59 @@ const search = (arr, target) => {
   if (target >= arr[0]) {
     return binarySearch(arr, target, 0, pivot - 1);
   } else if (target <= arr[0]) {
-    console.log(pivot, arr.length - 1);
     return binarySearch(arr, target, pivot + 1, arr.length - 1);
   }
   return -1;
 };
 
-console.log(search([4, 5, 6, 0, 1, 2, 3], 0));
+// console.log(search([4, 5, 6, 0, 1, 2, 3], 0));
+
+// find pivot
+// pivot is p > m + 1 || p < m -1  && pivot is the largest element
+
+const findPivot1 = (arr) => {
+  let s = 0;
+  let e = arr.length - 1;
+  while (s <= e) {
+    let mid = Math.floor((e - s) / 2);
+    if (arr[mid] > arr[mid + 1]) {
+      return mid;
+    }
+    if (arr[mid] < arr[mid - 1]) {
+      return mid - 1;
+    }
+    if (arr[s] >= arr[mid]) {
+      e = mid - 1;
+    } else if (arr[s] <= arr[mid]) {
+      s = mid + 1;
+    }
+  }
+  return -1;
+};
+// console.log(findPivot1([10, 11, 1, 2, 3, 4]));
+// if no pivot return - 1
+// if the target is equal to pivot return pivot
+// search in rotated array if the target is greater than start search between start and pivot if (target > start) s, pivot -1
+// if the target is less than start search in pivot + 1 and arr.lenght - 1  if (target< start) (pivot + 1 , arr.length-1 )
+
+const searchRange2 = (arr, target) => {
+  let pivot = findPivot1(arr);
+  let s = 0;
+  let e = arr.length - 1;
+  if (pivot === -1) {
+    return pivot;
+  }
+  if (target === arr[pivot]) {
+    return pivot;
+  }
+  if (target === arr[pivot]) {
+    return pivot;
+  }
+  if (target >= arr[s]) {
+    return binarySearch(arr, target, 0, pivot - 1);
+  } else if (target <= arr[s]) {
+    return binarySearch(arr, target, pivot + 1, arr.length - 1);
+  }
+  return -1;
+};
+console.log(searchRange2([10, 11, 2, 3, 4, 5], 523));
