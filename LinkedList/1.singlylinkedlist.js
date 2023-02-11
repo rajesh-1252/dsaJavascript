@@ -27,6 +27,18 @@ class LL {
     }
     this.length++;
   }
+
+  insertRec(index, value, node) {
+    if (index === 0) {
+      let temp = new Node(value, node);
+      // temp.next = node;
+      this.length++;
+      return temp;
+    }
+    node.next = this.insertRec(index - 1, value, node.next);
+    return node;
+  }
+
   push(value) {
     if (this.tail === null) {
       this.unshift(value);
@@ -45,6 +57,40 @@ class LL {
     this.tail = temp;
     temp.next = null;
     this.length--;
+  }
+  delete(index) {
+    // returns the deleted value
+    let temp = this.head;
+    if (index === 0) {
+      this.shift();
+    }
+    for (let i = 0; i < index - 1; i++) {
+      temp = temp.next;
+    }
+    console.log(temp.value);
+    let nextNode = temp.next.next;
+    temp.next = nextNode;
+  }
+  get(index) {
+    // return value aka int
+    if (index > this.length - 1) {
+      throw new Error("index out of bound");
+    }
+    let temp = this.head;
+    for (let i = 0; i < index; i++) {
+      temp = temp.next;
+    }
+    return temp.value;
+  }
+  find(value) {
+    let temp = this.head;
+    while (temp.next !== null) {
+      if (temp.value === value) {
+        return temp;
+      }
+      temp = temp.next;
+    }
+    return null;
   }
 
   insert(index, value) {
@@ -91,10 +137,21 @@ class LL {
 let linkedList = new LL();
 linkedList.unshift("1");
 linkedList.unshift("2");
+linkedList.unshift("2");
+linkedList.unshift("2");
 linkedList.push("3");
 linkedList.insert(0, "22");
 linkedList.pop();
-linkedList.display();
-linkedList.display2();
+// console.log(linkedList.insertRec(0, "hello", linkedList.head));
+// linkedList.display();
 
+// linkedList.display2();
+
+// linkedList.delete(0);
+// console.log(linkedList.get(3));
 // console.log(linkedList);
+
+// hello this is my first how are you m
+console.log("output");
+
+export default LL;

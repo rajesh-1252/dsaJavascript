@@ -12,6 +12,39 @@ const subset = (str, target) => {
   }
 };
 // console.log(subset("adfads", "a"));
+let str2 = "hello";
+console.log(str2.substring(0, 5));
+
+// process unprocess method
+const subset2 = (p, up) => {
+  if (up.length === 0) {
+    console.log(p);
+    return;
+  }
+  let ch = up.charAt(0);
+
+  if (ch === "a") {
+    subset2(p, up.substring(1));
+  } else {
+    subset2(p + ch, up.substring(1));
+  }
+};
+// subset2("", "abcaaa");
+
+const skipApple = (up, count) => {
+  if (up.length === 0) {
+    console.log(count);
+    return "";
+  }
+  let ch = up.charAt(0);
+
+  if (up.startsWith("apple")) {
+    return skipApple(up.substring(5), count + 1);
+  } else {
+    return ch + skipApple(up.substring(1), count);
+  }
+};
+// console.log(skipApple("helloapple", 0));
 
 const skipTarget = (str, target) => {
   if (str.length === 0) {
